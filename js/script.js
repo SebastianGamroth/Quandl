@@ -1,4 +1,5 @@
 const API_KEY = 'EE9PYLn8oYA-qxW3SQYq';
+
 let startDate
 let endDate
 let firstStart = false;
@@ -10,8 +11,11 @@ async function loadCourseCurrently() {
 }
 
 async function loadCourse() {
+    // https://data.nasdaq.com/api/v3/datasets/BCHAIN/MKPRU?start_date='2022-05-22'&end_date='2022-05-22'&api_key=EE9PYLn8oYA-qxW3SQYq
+
     // let url = `https://data.nasdaq.com/api/v3/datasets/BITFINEX/LUNAF0USTF0?start_date=${startDate}&end_date=${endDate}&api_key=${API_KEY}`;
     let url = `https://data.nasdaq.com/api/v3/datasets/BCHAIN/MKPRU?start_date=${startDate}&end_date=${endDate}&api_key=${API_KEY}`;
+
     let response = await fetch(url);
     let responseAsJson = await response.json();
     // let bitcoinDate = responseAsJson.dataset.data[0];
@@ -23,14 +27,15 @@ async function loadCourse() {
     // console.log(responseAsJson);
     dateCalculat(bitcoinDate);
     myChart();
+    xValues = [];
+    yValues = [];
 }
 
 function showBitcoinToday(bitcoinDate) {
     document.getElementById('showBitcoinToday').innerHTML = bitcoinDate[0][1];
 
-    let date = bitcoinDate[0][0];
-    console.log(date);
-    // console.log(date.toLocaleDateString('de-DE'));
+    let date = new Date(bitcoinDate[0][0]);
+    date = date.toLocaleDateString('de-DE');
 
     document.getElementById('showDateToday').innerHTML = date;
     firstStart = true;
@@ -43,7 +48,6 @@ function showCourse() {
     endDate = endDate.value;
 
     loadCourse();
-    // renderTable();
 }
 
 function renderTable(bitcoinDate) {
@@ -59,12 +63,17 @@ function renderTable(bitcoinDate) {
             </tr>
         `;
 
+
     for (let i = 0; i < bitcoinDate.length; i++) {
         const element = bitcoinDate[i];
+
+        let date = new Date(element[0]);
+        date = date.toLocaleDateString('de-DE');
+
         table.innerHTML +=
             `
             <tr>
-                <td>${element[0]}</td>
+                <td>${date}</td>
                 <td>${element[1]}</td>
             </tr>
         `;
