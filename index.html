@@ -17,17 +17,20 @@
 
     <h1>Bitcoin Kurs</h1>
 
-    <div class="dateContainer">
-        <div class="date">
-            <h2>Start Datum</h2>
-            <input id="startDate" type="date" placeholder="tt.mm.jjjj">
+    <!-- <form onsubmit="formValidation()"> -->
+        <div class="dateContainer">
+            <div class="date">
+                <h2>Start Datum</h2>
+                <input id="startDate" type="date" data-placeholder="08.06.2022">
+                <!-- tt.mm.jjjj -->
+            </div>
+            <div class="date">
+                <h2>End Datum</h2>
+                <input id="endDate" type="date" placeholder="09.06.2022">
+            </div>
+            <button onclick="showCourse()">Anzeigen</button>
         </div>
-        <div class="date">
-            <h2>End Datum</h2>
-            <input id="endDate" type="date" placeholder="tt.mm.jjjj">
-        </div>
-        <button onclick="showCourse()">Anzeigen</button>
-    </div>
+    <!-- </form> -->
 
     <div>Aktuell <b id="showDateToday">2022-06-05</b> kostet ein Bitcoin <b id="showBitcoinToday">60.000</b> USD</div>
 

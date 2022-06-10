@@ -7,47 +7,58 @@ let firstStart = false;
 async function loadCourseCurrently() {
     startDate = new Date().toISOString().split('T')[0]; //'2022-05-22'
     endDate = new Date().toISOString().split('T')[0];
+
     loadCourse();
+    input2();
+}
+
+function input2() {
+    document.getElementById('startDate').placeholder = "10.06.2022";
+    document.getElementById('endDate').placeholder = "10.06.2022";
+    console.log(startDate, endDate)
 }
 
 async function loadCourse() {
     // https://data.nasdaq.com/api/v3/datasets/BCHAIN/MKPRU?start_date='2022-05-22'&end_date='2022-05-22'&api_key=EE9PYLn8oYA-qxW3SQYq
-
     // let url = `https://data.nasdaq.com/api/v3/datasets/BITFINEX/LUNAF0USTF0?start_date=${startDate}&end_date=${endDate}&api_key=${API_KEY}`;
     let url = `https://data.nasdaq.com/api/v3/datasets/BCHAIN/MKPRU?start_date=${startDate}&end_date=${endDate}&api_key=${API_KEY}`;
 
     let response = await fetch(url);
     let responseAsJson = await response.json();
-    // let bitcoinDate = responseAsJson.dataset.data[0];
     let bitcoinDate = responseAsJson.dataset.data;
-
 
     if (!firstStart) { showBitcoinToday(bitcoinDate); };
     renderTable(bitcoinDate);
-    // console.log(responseAsJson);
     dateCalculat(bitcoinDate);
     myChart();
     xValues = [];
     yValues = [];
 }
 
+function dateFormatDE(index){
+    let options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+    let date = new Date(index);
+    date = date.toLocaleDateString('de-DE', options);
+    return date;
+}
+
 function showBitcoinToday(bitcoinDate) {
     document.getElementById('showBitcoinToday').innerHTML = bitcoinDate[0][1];
 
-    let date = new Date(bitcoinDate[0][0]);
-    date = date.toLocaleDateString('de-DE');
+    let date = dateFormatDE(bitcoinDate[0][0]);
 
     document.getElementById('showDateToday').innerHTML = date;
     firstStart = true;
 }
 
 function showCourse() {
-    startDate = document.getElementById('startDate');
-    endDate = document.getElementById('endDate');
-    startDate = startDate.value;
-    endDate = endDate.value;
+    startDate = document.getElementById('startDate').value;
+    endDate = document.getElementById('endDate').value;
 
     loadCourse();
+    // myChart();
+    // xValues = [];
+    // yValues = [];
 }
 
 function renderTable(bitcoinDate) {
@@ -67,8 +78,7 @@ function renderTable(bitcoinDate) {
     for (let i = 0; i < bitcoinDate.length; i++) {
         const element = bitcoinDate[i];
 
-        let date = new Date(element[0]);
-        date = date.toLocaleDateString('de-DE');
+        let date = dateFormatDE(element[0]);
 
         table.innerHTML +=
             `
@@ -86,7 +96,9 @@ var yValues = [];
 function dateCalculat(bitcoinDate) {
     for (let i = 0; i < bitcoinDate.length; i++) {
         const element = bitcoinDate[i];
-        xValues.push(element[0]);
+
+        let date = dateFormatDE(element[0]);
+        xValues.push(date);
         yValues.push(element[1]);
     }
 }
