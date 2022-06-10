@@ -1,0 +1,84 @@
+body {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    font-family: 'Open Sans';
+    color: rgb(48, 48, 48);
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 18px;
+    margin: 8px 0px;
+    color: #525252;
+}
+
+.dateContainer {
+    display: flex;
+}
+
+.date {
+    margin: 16px;
+    border: 1px solid #6e6e6e;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.date input {
+    border: none;
+    background-color: #ececec;
+    border-radius: 0px 0px 4px 4px;
+    font-size: 14px;
+    padding: 6px;
+    cursor: pointer;
+}
+
+button {
+    border: none;
+    background-color: rgb(70 70 255);
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    margin: 16px 12px;
+    padding: 0px 28px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(87, 87, 255);
+}
+
+.tabelCourse {
+    margin: 16px;
+    width: 100%;
+    max-width: 460px;
+    border-collapse: collapse;
+}
+
+th:first-child {
+    border-top-left-radius: 4px;
+    background-color: #ececec;
+}
+
+th:last-child {
+    border-top-right-radius: 4px;
+    background-color: #ececec;
+}
+
+tr:nth-last-of-type(even) {
+    background-color: #cbeebf;
+}
+
+
+.myChart {
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    margin: 16px 0px;
+}

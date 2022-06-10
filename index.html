@@ -7,16 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
-
+    <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="./js/script.js"></script>
 </head>
 
-<body onload="loadCourse()">
+<body onload="loadCourseCurrently()">
 
-    <h1>Was kostet ein Bitcoin aktuell?</h1>
+    <h1>Bitcoin Kurs</h1>
 
-    <div>Aktuell <b id="showDataToday">2022-06-05</b> kostet ein Bitcoin <b id="showBitcoinToday">60.000</b> USD</div>
+    <div class="dateContainer">
+        <div class="date">
+            <h2>Start Datum</h2>
+            <input id="startDate" type="date" placeholder="tt.mm.jjjj">
+        </div>
+        <div class="date">
+            <h2>End Datum</h2>
+            <input id="endDate" type="date" placeholder="tt.mm.jjjj">
+        </div>
+        <button onclick="showCourse()">Anzeigen</button>
+    </div>
+
+    <div>Aktuell <b id="showDateToday">2022-06-05</b> kostet ein Bitcoin <b id="showBitcoinToday">60.000</b> USD</div>
+
+    <table class="tabelCourse" id="tabelCourse"></table>
+
+    <canvas class="myChart" id="myChart"></canvas>
 
 </body>
 
