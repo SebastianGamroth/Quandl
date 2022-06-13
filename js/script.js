@@ -11,20 +11,6 @@ let chartValuesY = [];
 let chartValuesMin;
 let chartValuesMax;
 
-// async function loadCourseCurrently() {
-//     let today = new Date();
-//     today.setDate(new Date().getDate() - 2);
-//     let startDateLastDay = today.toISOString().split('T')[0];
-
-//     startDate = startDateLastDay;
-
-//     // startDate = new Date().toISOString().split('T')[0]; //'2022-05-22'
-//     endDate = new Date().toISOString().split('T')[0];
-
-//     id = 1;
-//     loadCourse();
-// }
-
 function changeProduct(num) {
     id = num;
     startDate = document.getElementById('startDate').value;
@@ -54,7 +40,6 @@ async function loadCourse() {
     let response = await fetch(url);
     let responseAsJson = await response.json(url);
     let courseDateApi = responseAsJson.dataset.data;
-    // console.log(responseAsJson)
 
     renderTable(courseDateApi);
     currencyChart(courseDateApi);
@@ -77,16 +62,8 @@ function textCourseUpdate() {
     let nameCourse;
     if (id == 0) { nameCourse = 'Bitcoin' };
     if (id == 1) { nameCourse = 'Gold' };
-    document.getElementById('textCourseUpdate').innerHTML = `<b>${nameCourse}</b> Kurs <br><nobr>max. <b>${chartValuesMax} USD</b> <wbr>min. <b>${chartValuesMin} USD</b></nobr>`;
+    document.getElementById('textCourseUpdate').innerHTML = `<nobr><b>${nameCourse}</b> Kurs <br>max. <b>${chartValuesMax} USD</b> <wbr>min. <b>${chartValuesMin} USD</b></nobr>`;
 }
-
-// change date - button
-// async function formValidation() {
-//     startDate = await document.getElementById('startDate').value;
-//     endDate = await document.getElementById('endDate').value;
-
-//     loadCourse();
-// }
 
 function renderTable(courseDateApi) {
     let table = document.getElementById('tabelCourse');
