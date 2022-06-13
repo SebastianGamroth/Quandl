@@ -11,19 +11,18 @@ let chartValuesY = [];
 let chartValuesMin;
 let chartValuesMax;
 
-async function changeDate() {
+function changeProduct(num) {
+    id = num;
     startDate = document.getElementById('startDate').value;
     endDate = document.getElementById('endDate').value;
 
-    document.getElementById('diagram1').classList.add('d-none');
-    document.getElementById('diagram2').classList.add('d-none');
-    document.getElementById('myChart').classList.remove('d-none');
+    if (!startDate == '' && !endDate == '') {
+        document.getElementById('diagram1').classList.add('d-none');
+        document.getElementById('diagram2').classList.add('d-none');
+        document.getElementById('myChart').classList.remove('d-none');
 
-    loadCourse();
-}
-
-function changeProductNum(num) {
-    id = num;
+        loadCourse();
+    }
 }
 
 function renderChangeProduct() {
@@ -41,7 +40,6 @@ async function loadCourse() {
     let response = await fetch(url);
     let responseAsJson = await response.json(url);
     let courseDateApi = responseAsJson.dataset.data;
-    // console.log(responseAsJson)
 
     renderTable(courseDateApi);
     currencyChart(courseDateApi);
