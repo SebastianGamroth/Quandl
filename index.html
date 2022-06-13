@@ -7,37 +7,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="shortcut icon" href="./img/favicon.png" type="image/x-icon">
-    <link rel="stylesheet" href="./css/fonts.css">
     <link rel="stylesheet" href="./css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="./js/script.js"></script>
+    <script src="./js/templates.js"></script>
 </head>
 
-<body onload="loadCourseCurrently()">
+<body id="body" onload="includeHTML()">
 
-    <h1>Bitcoin Kurs</h1>
+    <!-- page Laws -->
+    <div class="pageLaws d-none" id="pageLaws">
+        <div class="law d-none" id="imprint">
+            <div class="lowContent" w3-include-html="./templates/imprint.html"></div>
+        </div>
+        <div class="law d-none" id="privacy">
+            <div class="lowContent" w3-include-html="./templates/privacy.html"></div>
+        </div>
+        <div class="law d-none" id="copyright">
+            <div class="lowContent" w3-include-html="./templates/copyright.html"></div>
+        </div>
+    </div>
 
-    <!-- <form onsubmit="formValidation()"> -->
+    <!-- navigation menu -->
+    <div class="navBar">
+        <img class="navBarImg" id="barImg" onclick="navBar()" src="./img/Menu.svg">
+        <div class="menu d-none" id="menu">
+            <button class="lawButton" id="law_0" onclick="imprint()">Impressum</button>
+            <button class="lawButton" id="law_1" onclick="privacy()">Datenschutz</button>
+            <button class="lawButton" id="law_2" onclick="copyright()">Copyright</button>
+        </div>
+        <div class="backNavBar d-none" id="backNavBar" onclick="backNavBar()"></div>
+        <div class="back d-none" id="back" onclick="back()"><img class="backImg" src="./img/close.svg"></div>
+    </div>
+
+    <!-- jump window top -->
+    <div class="arrowUp" id="arrowUp">
+        <a onclick="arrowUp()" href="#"><img src="./img/arrowUp.svg" alt="arrowUp"></a>
+    </div>
+
+    <!-- main Container -->
+    <h1>Quandl</h1>
+    <!-- <h1>Quandl Aktueller Kurs</h1> -->
+    <div class="headerLine"></div>
+
+    <!-- kein Weekend -->
+    <!-- https://stackoverflow.com/questions/49863189/disable-weekends-on-html-5-input-type-date -->
+
+    <!-- change date - button -->
+    <!-- <form action="#" onsubmit="formValidation()"> -->
         <div class="dateContainer">
-            <div class="date">
-                <h2>Start Datum</h2>
-                <input id="startDate" type="date" data-placeholder="08.06.2022">
-                <!-- tt.mm.jjjj -->
+            <div class="dateBox">
+                <div class="date">
+                    <h2>Start Datum</h2>
+                    <input id="startDate" type="date" required data-placeholder="tt.mm.jjjj">
+                </div>
+                <div class="date">
+                    <h2>End Datum</h2>
+                    <input id="endDate" type="date" required placeholder="tt.mm.jjjj">
+                </div>
             </div>
-            <div class="date">
-                <h2>End Datum</h2>
-                <input id="endDate" type="date" placeholder="09.06.2022">
+            <div class="buttonContainer">
+                <!-- <button type="submit" class="showBtn">Bitcoin</button>
+                <button type="submit" class="showBtn">Gold</button> -->
+                <button onclick="changeProduct(0)" class="showBtn">Bitcoin</button>
+                <button onclick="changeProduct(1)" class="showBtn">Gold</button>
             </div>
-            <button onclick="showCourse()">Anzeigen</button>
         </div>
     <!-- </form> -->
 
-    <div>Aktuell <b id="showDateToday">2022-06-05</b> kostet ein Bitcoin <b id="showBitcoinToday">60.000</b> USD</div>
+
+    <div class="currentNews" id="textCourseUpdate"><nobr>Aktuelle Kurse <wbr>mit Min. Max. Werten <wbr>
+        anzeigen lassen</nobr>
+    </div>
 
     <table class="tabelCourse" id="tabelCourse"></table>
+    <div class="diagram" id="diagram1"><img src="./img/table.svg"></div>
 
-    <canvas class="myChart" id="myChart"></canvas>
-
+    <canvas class="myChart d-none" id="myChart"></canvas>
+    <div class="diagram" id="diagram2"><img src="./img/chart.svg"></div>
 </body>
 
 </html>
