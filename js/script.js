@@ -39,7 +39,7 @@ async function loadCourse() {
     renderChangeProduct();
 
     let response = await fetch(url);
-    let responseAsJson = await response.json(url);
+    let responseAsJson = await response.json();
     let courseDateApi = responseAsJson.dataset.data;
     // console.log(responseAsJson)
 
