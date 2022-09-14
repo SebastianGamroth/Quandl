@@ -12,9 +12,11 @@ let chartValuesMin;
 let chartValuesMax;
 
 async function changeDate() {
+
     startDate = document.getElementById('startDate').value;
     endDate = document.getElementById('endDate').value;
-
+    console.log(startDate,endDate)
+    
     document.getElementById('diagram1').classList.add('d-none');
     document.getElementById('diagram2').classList.add('d-none');
     document.getElementById('myChart').classList.remove('d-none');
